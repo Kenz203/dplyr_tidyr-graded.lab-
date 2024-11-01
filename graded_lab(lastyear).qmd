@@ -19,7 +19,7 @@ library(tidyr)
 ### Question 1: Load data
 ```{r}
 library(readr)
-spotify <- readRDS("/Users/macbookpro/Desktop/Master/Semester One/Data Management and Programming/dplyr_tidyr-graded.lab-/top-spotify-songs-from-20102019-by-year.csv")
+spotify <- read_delim("/Users/macbookpro/Desktop/Master/Semester One/Data Management and Programming/dplyr_tidyr-graded.lab-/top-spotify-songs-from-20102019-by-year.csv",";")
 
 ```
 
