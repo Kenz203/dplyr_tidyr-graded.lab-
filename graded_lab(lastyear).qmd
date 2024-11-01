@@ -8,20 +8,19 @@ format:
 
 ## Exercice 1
 
+### Question 1: Load data
 ```{r}
 #| message: false
 #| cache: false
 here::i_am("top-spotify-songs-from-20102019-by-year.csv")
 library(here)
-```
-### Question 1:
-```{r}
-
+library(dplyr)
+library(tidyr)
 ```
 
-### Question 2:
+### Question 2: 
 ```{r}
-
+spotify %>% distinct(A)
 ```
 
 ### Question 3:
