@@ -25,7 +25,11 @@ spotify <- read_delim("/Users/macbookpro/Desktop/Master/Semester One/Data Manage
 
 ### Question 2: Using distinct (among other functions) compute the number of different songs, artists and musical genre that have been included in the data set.
 ```{r}
-spotify %>% distinct(song_name, artist, genre)
+spotify %>%summarise(
+    num_songs = n_distinct(song_name),
+    num_artists = n_distinct(artist),
+    num_genres = n_distinct(genre)
+  )
 
 ```
 
