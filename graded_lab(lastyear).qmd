@@ -8,7 +8,6 @@ format:
 
 ## Exercice 1
 
-### Question 1: Load data
 ```{r}
 #| message: false
 #| cache: false
@@ -17,10 +16,17 @@ library(here)
 library(dplyr)
 library(tidyr)
 ```
-
-### Question 2: 
+### Question 1: Load data
 ```{r}
-spotify %>% distinct(A)
+library(readr)
+spotify <- readRDS("/Users/macbookpro/Desktop/Master/Semester One/Data Management and Programming/dplyr_tidyr-graded.lab-/top-spotify-songs-from-20102019-by-year.csv")
+
+```
+
+### Question 2: Using distinct (among other functions) compute the number of different songs, artists and musical genre that have been included in the data set.
+```{r}
+spotify %>% distinct(song_name, artist, genre)
+
 ```
 
 ### Question 3:
