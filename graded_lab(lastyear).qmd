@@ -25,22 +25,22 @@ spotify <- read_delim("/Users/macbookpro/Desktop/Master/Semester One/Data Manage
 
 ### Question 2: Using distinct (among other functions) compute the number of different songs, artists and musical genre that have been included in the data set.
 ```{r}
-spotify %>%summarise(
-    num_songs = n_distinct(song_name),
-    num_artists = n_distinct(artist),
-    num_genres = n_distinct(genre)
-  )
+spotify %>%summarise(songs=n_distinct(title),
+                     musical_genre=n_distinct(`top genre`))
 
 ```
 
-### Question 3:
+### Question 3: number of songs per year
 ```{r}
-
+spotify %>%
+  group_by(year) %>%
+  summarise(num_songs = n())
 ```
 
-### Question 4:
+### Question 4:  most popular artist
 ```{r}
-
+spotify %>%
+  
 ```
 
 ### Question 5:
