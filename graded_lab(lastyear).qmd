@@ -26,6 +26,7 @@ spotify <- read_delim("/Users/macbookpro/Desktop/Master/Semester One/Data Manage
 ### Question 2: Using distinct (among other functions) compute the number of different songs, artists and musical genre that have been included in the data set.
 ```{r}
 spotify %>%summarise(songs=n_distinct(title),
+                     artists=n_distinct(artist),
                      musical_genre=n_distinct(`top genre`))
 
 ```
@@ -37,14 +38,20 @@ spotify %>%
   summarise(num_songs = n())
 ```
 
-### Question 4:  most popular artist
+### Question 4:  most popular artist with largest number of songs in the data set (count each song only once)
 ```{r}
-spotify %>%
-  
+spotify %>% distinct(title, artist) %>%
+  count(artist) %>%
+  top_n(1, n)
 ```
 
-### Question 5:
+### Question 5: Min,  Max, Mean, and Median bpm
 ```{r}
+spotify %>% group_by(`top genre`) %>%
+  summarise(min_bpm = min(bpm,max_bpm = max(bpm),
+    mean_bpm = mean(bpm),
+    median_bpm = median(bpm),
+    num_songs = n()))
 
 ```
 
@@ -52,8 +59,12 @@ spotify %>%
 
 ### Question 1:
 ```{r}
-
+here::i_am("grades.csv")
+library(here)
+library(dplyr)
+library(tidyr)
 ```
+
 
 ### Question 2:
 ```{r}
