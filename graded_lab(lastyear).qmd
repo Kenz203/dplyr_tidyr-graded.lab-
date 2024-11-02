@@ -104,16 +104,18 @@ grades %>%
 ### Question 6: New data framereshapped to a long format, keeping the Id and Group_by
 ```{r}
 grades %>%
-  pivot_longer(
+  pivot_wider(
     cols = matches("MCQ_|Online_MCQ_"),
     names_to = "name",
     values_to = "value"
   )
 ```
 
-### Question 7:
+### Question 7: using long format, missing grades in total for each student
 ```{r}
-
+grades %>%
+  group_by(Id) %>%
+  summarise(missing_count = sum(is.na(value)))
 ```
 
 ### Question 8:
