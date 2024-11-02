@@ -66,8 +66,6 @@ library(tidyr)
 library(readr)
 grades <- read_delim("grades.csv",";")
 ```
-
-
 ### Question 2: Compute Min, Max, Mean, Mediann
 ```{r}
 grades %>%summarise(
@@ -78,7 +76,6 @@ grades %>%summarise(
   )
 
 ```
-
 ### Question 3: Extract the students who missed the Exam
 ```{r}
 grades %>% 
@@ -86,26 +83,23 @@ grades %>%
   summarise(num_students = n())
 
 ```
-
 ### Question 4: Compute number of students in each Group
 ```{r}
 grades %>%
   group_by(Group) %>%
   summarise(number_students= n())
 ```
-
 ### Question 5:Compute the number of students who missed the Exam in each Group
 ```{r}
 grades %>%
   group_by(Group)%>%
   summarise(number_missed=sum(is.na(Exam)))
 ```
-
 ### Question 6: New data frame reshapped to a long format, keeping the Id and Group_by
 ```{r}
-long_grades <- grades %>% pivot_longer(-c(Id, Group))
+long_grades <- grades %>% 
+  pivot_longer(-c(Id, Group))
 long_grades %>% slice(1:5)
-
 ```
 
 ### Question 7: using long format, missing grades in total for each student
@@ -136,11 +130,10 @@ long_grades %>%
 
 ### Question 10: Create table with 2 columns: Id and Missed
 ```{r}
-long_grades %>%
-  filter(str_starts(name, "MCQ_")) %>%
+grades %>%
+  filter(str_starts(name, "MCQ")) %>%
   group_by(Id) %>%
-  summarise(Missed = sum(anyNA(is.na(value)))
-
+  summarise(Missed = anyNA(value))
 ```
 
 ### Question 11: Create tablewith 2columns: Group andP_missed with the percentage
