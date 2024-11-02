@@ -57,18 +57,20 @@ spotify %>% group_by(`top genre`) %>%
 
 ## Exercice 2
 
-### Question 1:
+### Question 1: Load data 
 ```{r}
 here::i_am("grades.csv")
 library(here)
 library(dplyr)
 library(tidyr)
+library(readr)
+grades <- read_delim("grades.csv",";")
 ```
 
 
 ### Question 2:
 ```{r}
-
+grades %>% summarise(mean(exam))
 ```
 
 ### Question 3:
