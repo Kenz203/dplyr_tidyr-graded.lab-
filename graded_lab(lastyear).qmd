@@ -91,17 +91,24 @@ grades %>%
 ```{r}
 grades %>%
   group_by(Group) %>%
-  summarise(num_missed = sum(is.na(Exam)))
+  summarise(number_students= n())
 ```
 
-### Question 5:
+### Question 5:Compute the number of students who missed the Exam in each Group
 ```{r}
-
+grades %>%
+  group_by(Group)%>%
+  summarise(number_missed=sum(is.na(Exam)))
 ```
 
-### Question 6:
+### Question 6: New data framereshapped to a long format, keeping the Id and Group_by
 ```{r}
-
+grades %>%
+  pivot_longer(
+    cols = matches("MCQ_|Online_MCQ_"),
+    names_to = "name",
+    values_to = "value"
+  )
 ```
 
 ### Question 7:
