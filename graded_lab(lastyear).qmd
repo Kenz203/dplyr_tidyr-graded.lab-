@@ -68,19 +68,30 @@ grades <- read_delim("grades.csv",";")
 ```
 
 
-### Question 2:
+### Question 2: Compute Min, Max, Mean, Mediann
 ```{r}
-grades %>% summarise(mean(exam))
+grades %>%summarise(
+    min_exam = min(Exam, na.rm = TRUE),
+    max_exam = max(Exam, na.rm = TRUE),
+    median_exam = median(Exam, na.rm = TRUE),
+    mean_exam = mean(Exam, na.rm = TRUE)
+  )
+
 ```
 
-### Question 3:
+### Question 3: Extract the studentswho missed the Exam
 ```{r}
+grades %>% 
+  group_by(Group)%>%
+  summarise(num_students = n())
 
 ```
 
-### Question 4:
+### Question 4: Compute number of students in each Group
 ```{r}
-
+grades %>%
+  group_by(Group) %>%
+  summarise(num_missed = sum(is.na(Exam)))
 ```
 
 ### Question 5:
