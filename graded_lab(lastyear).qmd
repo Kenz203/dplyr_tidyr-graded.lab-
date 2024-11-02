@@ -79,7 +79,7 @@ grades %>%summarise(
 
 ```
 
-### Question 3: Extract the studentswho missed the Exam
+### Question 3: Extract the students who missed the Exam
 ```{r}
 grades %>% 
   group_by(Group)%>%
@@ -101,39 +101,53 @@ grades %>%
   summarise(number_missed=sum(is.na(Exam)))
 ```
 
-### Question 6: New data framereshapped to a long format, keeping the Id and Group_by
+### Question 6: New data frame reshapped to a long format, keeping the Id and Group_by
 ```{r}
-grades %>%
-  pivot_wider(
-    cols = matches("MCQ_|Online_MCQ_"),
-    names_to = "name",
-    values_to = "value"
-  )
+long_grades <- grades %>% pivot_longer(-c(Id, Group))
+long_grades %>% slice(1:5)
+
 ```
 
 ### Question 7: using long format, missing grades in total for each student
 ```{r}
-grades %>%
+long_grades %>%
   group_by(Id) %>%
   summarise(missing_count = sum(is.na(value)))
-```
-
-### Question 8:
-```{r}
 
 ```
 
-### Question 9:
+### Question 8: Using long format, same info as in question 5
 ```{r}
+long_grades %>%
+  filter(name == "Exam") %>%
+  group_by(Group) %>%
+  summarise(num_missed = sum(is.na(value)))
 
 ```
 
-### Question 10:
+### Question 9:Using long format, compute the number of missing grades for online tests for each students
 ```{r}
+library(stringr)
+long_grades %>%
+  filter(str_starts(name, "Online_MCQ_")) %>%
+  group_by(Id) %>%
+  summarise(online_missing_count = sum(is.na(value)))
+```
+
+### Question 10: Create table with 2 columns: Id and Missed
+```{r}
+long_grades %>%
+  filter(str_starts(name, "MCQ_")) %>%
+  group_by(Id) %>%
+  summarise(Missed = sum(anyNA(is.na(value)))
 
 ```
 
-### Question 11:
+### Question 11: Create tablewith 2columns: Group andP_missed with the percentage
 ```{r}
+grades %>%
+  left_join(grades %>% select(Id, Group), by = "Id") %>%
+  group_by(Group) %>%
+  summarise(P_missed = mean(Missed) * 100)
 
 ```
